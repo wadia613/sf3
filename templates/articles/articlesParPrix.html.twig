@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Articles par Prix{% endblock %}
+
+{% block body %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><i class="fas fa-money-bill-wave"></i> Articles par Prix</h1>
+    <a href="{{ path('article_list') }}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Retour
+    </a>
+</div>
+
+{# Formulaire de recherche par prix #}
+<div class="card mb-4">
+    <div class="card-header bg-light">
+        <h5 class="mb-0"><i class="fas fa-search-dollar"></i> Recherche par prix</h5>
+    </div>
+    <div class="card-body">
+        {{ form_start(form, {'attr': {'class': 'row g-3 align-items-end'}}) }}
+            <div class="col-md-4">
+                {{ form_row(form.minPrice, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_row(form.maxPrice, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-search"></i> Rechercher
+                </button>
+            </div>
+        {{ form_end(form) }}
+    </div>
+</div>
+
+{% if articles %}
+    <div class="alert alert-info">
+        <strong>{{ articles|length }}</strong> article(s) trouvé(s) dans la plage de prix
+    </div>
+    
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                    <th>Catégorie</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for article in articles %}
+                <tr>
+                    <td>{{ article.id }}</td>
+                    <td>{{ article.nom }}</td>
+                    <td>{{ article.prix }} €</td>
+                    <td>
+                        {% if article.category %}
+                            <span class="badge bg-info">{{ article.category.titre }}</span>
+                        {% else %}
+                            <span class="badge bg-warning">Aucune catégorie</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a href="{{ path('article_show', {'id': article.id}) }}" class="btn btn-info btn-sm">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="{{ path('edit_article', {'id': article.id}) }}" class="btn btn-warning btn-sm">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <div class="alert alert-warning text-center">
+        <h4><i class="fas fa-exclamation-triangle"></i> Aucun article trouvé</h4>
+        <p>Veuillez spécifier une plage de prix pour afficher les articles.</p>
+    </div>
+{% endif %}
+{% endblock %}

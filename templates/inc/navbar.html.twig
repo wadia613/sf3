@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="{{ path('article_list') }}">
+            <i class="fas fa-store"></i> Boutique Symfony
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="navbar-nav ms-auto">
+                {# Page d'accueil avec recherche par nom #}
+                <a class="nav-link" href="{{ path('article_list') }}">
+                    <i class="fas fa-home"></i> Accueil
+                </a>
+                
+                {# Ajout d'articles et catégories #}
+                <a class="nav-link" href="{{ path('new_article') }}">
+                    <i class="fas fa-plus"></i> Ajouter Article
+                </a>
+                <a class="nav-link" href="{{ path('new_category') }}">
+                    <i class="fas fa-tags"></i> Ajouter Catégorie
+                </a>
+                
+                {# Liens vers les pages de recherche #}
+                <a class="nav-link" href="{{ path('article_par_cat') }}">
+                    <i class="fas fa-filter"></i> Recherche Catégorie
+                </a>
+                <a class="nav-link" href="{{ path('article_par_prix') }}">
+                    <i class="fas fa-euro-sign"></i> Recherche Prix
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

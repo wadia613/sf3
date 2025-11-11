@@ -1,5 +1,7 @@
 twig:
     file_name_pattern: '*.twig'
+    # AJOUTEZ CETTE LIGNE pour Bootstrap (étape 17)
+    form_themes: ['bootstrap_5_layout.html.twig']
 
 when@test:
     twig:

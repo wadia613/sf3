@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Article - {{ article.nom }}{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-warning text-dark">
+                <h3 class="card-title mb-0">
+                    <i class="fas fa-edit"></i> Modifier l'article : {{ article.nom }}
+                </h3>
+            </div>
+            <div class="card-body">
+                {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                
+                <div class="mb-3">
+                    {{ form_label(form.nom) }}
+                    {{ form_widget(form.nom) }}
+                    <div class="form-text text-danger">
+                        {{ form_errors(form.nom) }}
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    {{ form_label(form.prix) }}
+                    <div class="input-group">
+                        {{ form_widget(form.prix) }}
+                        <span class="input-group-text">€</span>
+                    </div>
+                    <div class="form-text text-danger">
+                        {{ form_errors(form.prix) }}
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    {{ form_label(form.category) }}
+                    {{ form_widget(form.category) }}
+                    <div class="form-text text-danger">
+                        {{ form_errors(form.category) }}
+                    </div>
+                </div>
+                
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a href="{{ path('article_list') }}" class="btn btn-secondary me-md-2">
+                        <i class="fas fa-arrow-left"></i> Annuler
+                    </a>
+                    <button type="submit" class="btn btn-warning">
+                        <i class="fas fa-edit"></i> Modifier l'article
+                    </button>
+                </div>
+                
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
